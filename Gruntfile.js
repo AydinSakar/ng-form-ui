@@ -4,13 +4,15 @@ module.exports = function(grunt) {
         concat: {
             options: {
                 // define a string to put between each file in the concatenated output
-                separator: ';'
+                //separator: ';'
             },
-            dist: {
-                // the files to concatenate
-                src: ['src/**/*.js'],
-                // the location of the resulting JS file
+            js: {
+                src: ['src/ng-form-ui.js', 'src/directives/**/*.js'],
                 dest: 'dist/<%= pkg.name %>.js'
+            },
+            css: {
+                src: 'src/**/*.css',
+                dest: 'dist/<%= pkg.name %>.css'
             }
         },
         uglify: {
@@ -21,7 +23,7 @@ module.exports = function(grunt) {
             },
             dist: {
                 files: {
-                    'dist/<%= pkg.name %>.min.js': ['<%= concat.dist.dest %>']
+                    'js/<%= pkg.name %>.min.js': ['<%= concat.js.dest %>']
                 }
             }
         },

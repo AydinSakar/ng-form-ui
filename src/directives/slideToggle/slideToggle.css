@@ -2,6 +2,9 @@
     cursor: pointer;
     overflow: hidden;
 }
+.slideToggle * {
+    box-sizing: content-box;
+}
 .slideToggle > input[type=checkbox] {
     display: none;
 }

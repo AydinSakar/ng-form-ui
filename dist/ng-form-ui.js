@@ -1,3 +1,6 @@
+/*global angular */
+
+angular.module('ng-form-ui', []);
 angular.module('ng-form-ui').
     directive('slideToggle', ['$timeout', function ($timeout) {
         return {

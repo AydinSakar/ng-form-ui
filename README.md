@@ -1,4 +1,4 @@
-#ng-form-ui
+#ng-form-ui  [![Build Status](https://travis-ci.org/bkuhl/ng-form-ui.png?branch=dev)](https://travis-ci.org/bkuhl/ng-form-ui)
 > Make your forms beautiful
 
 ## Features

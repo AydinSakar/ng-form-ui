@@ -43,15 +43,6 @@ angular.module('ng-form-ui').
                     }
                 });
 
-                //change button when value changes
-                scope.$watch(attrs.ngModel, function (oldValue, newValue) {
-                    if (newValue) {
-                        on();
-                    } else {
-                        off();
-                    }
-                });
-
                 //use timeout trick to be sure code isn't executed till dom is ready
                 $timeout(function() {
                     slide = container.childNodes[1];
@@ -91,6 +82,15 @@ angular.module('ng-form-ui').
                         off();
                     }
                     slide.style.transition = transitionCache;
+
+                    //change button when value changes
+                    scope.$watch(attrs.ngModel, function (oldValue, newValue) {
+                        if (newValue) {
+                            on();
+                        } else {
+                            off();
+                        }
+                    });
                 }, 0);
             }
         };

@@ -7,9 +7,3 @@ node_js:
 before_install:
   - npm install grunt-cli -g
   - npm install
-
-before_script:
-  - phantomjs --version
-
-script:
-  - DISPLAY=:99.0 grunt test:ci

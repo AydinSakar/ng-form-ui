@@ -7,6 +7,12 @@
 
 View Examples: http://bkuhl.github.io/ng-form-ui/
 
+## Roadmap
+
+* Ensure cross-browser CSS for slideToggle
+* Add styled checkboxes
+* Add styled select boxes
+
 ## Bug tracker
 
 Have a bug? Please create an issue here on GitHub!

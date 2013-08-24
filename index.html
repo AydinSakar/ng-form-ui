@@ -1,1 +1,39 @@
-My Github page
+<!DOCTYPE html>
+<html lang="en" ng-app="form-ui-examples">
+<head>
+    <title>ng-form-ui Examples</title>
+
+    <link href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://rawgithub.com/bkuhl/ng-form-ui/master/dist/ng-form-ui.css" rel="stylesheet">
+
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.1.5/angular.min.js"></script>
+    <script src="https://rawgithub.com/bkuhl/ng-form-ui/master/dist/ng-form-ui.js"></script>
+    <script type="text/javascript">
+        angular.module('form-ui-examples', ['ng-form-ui']).
+
+                controller('ExampleController', function ($scope) {
+                    $scope.slideToggleValue = true;
+                });
+    </script>
+</head>
+<body ng-controller="ExampleController">
+<div class='container'>
+    <span style="float: right; font-size: 12px;margin-top: 2em"><a href="https://github.com/bkuhl/ng-form-ui">Go to GitHub</a></span>
+    <h1>ng-form-ui Examples</h1>
+    <div style="height: 1px; background-color: #ccc;"></div>
+    <br/>
+    <p>Use these form elements to spice up your forms and keep things beautiful!</p>
+    <br/>
+    <h3>slideToggle</h3>
+    <div class="row">
+        <div class="col-md-9 highlight">
+            <pre>&lt;slide-toggle onLabel="On" offLabel="Off" ng-model="slideToggleValue"&gt;&lt;slide-toggle&gt;</pre>
+        </div>
+        <div class="col-md-3">
+            Value: {{ slideToggleValue }}<br/>
+            <slide-toggle onLabel="On" offLabel="Off" ng-model="slideToggleValue"></slide-toggle>
+        </div>
+    </div>
+</div>
+</body>
+</html>

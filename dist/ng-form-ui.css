@@ -1,0 +1,64 @@
+.slideToggle {
+    cursor: pointer;
+    overflow: hidden;
+}
+.slideToggle * {
+    box-sizing: content-box;
+}
+.slideToggle > input[type=checkbox] {
+    display: none;
+}
+.slideToggle > .stSlide {
+    transition: all 0.3s ease-in-out;
+}
+.stSlide > .stOff,
+.stSlide > .stOn,
+.stSlide > .stHandle {
+    font-family: Arial, Helvetica, sans-serif;
+    line-height: 22px;
+    font-size: 12px;
+    height: 22px;
+}
+.stSlide > .stOff,
+.stSlide > .stOn {
+    display: block;
+    float: left;
+    height: 22px;
+    padding: 4px 10px 0;
+
+    color: #fff;
+    text-align: center;
+    white-space: nowrap;
+    font-size: 11px;
+    line-height: 18px;
+    font-weight: bold;
+    text-transform: uppercase;
+    text-shadow: 0 1px #808080;
+}
+.stSlide > .stHandle {
+    display: block;
+    float: left;
+    min-width: 25px;
+    background: linear-gradient(to bottom, #fdfdfd 0%,#ebebeb 99%);
+    padding: 2px 1px 2px 0;
+
+    border: 1px solid #8f8f8f;
+    border-radius: 3px;
+    color: #c6c6c6;
+    letter-spacing: -1px;
+    text-align: center;
+}
+.stSlide > .stOn {
+    background: linear-gradient(to bottom, #8ab056 0%,#a2c46b 100%);
+    border: 1px solid #88a75c;
+    border-right: none;
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+}
+.stSlide > .stOff {
+    background: linear-gradient(to bottom, #d4786a 0%,#e39080 100%);
+    border: 1px solid #bd6e61;
+    border-left: none;
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+}

@@ -3,8 +3,9 @@
 
 ## Features
 
-* <select-box> directive for styled select boxes
 * <slide-toggle> directive for on/off style switches
+
+View Examples: http://bkuhl.github.io/ng-form-ui/
 
 ## Bug tracker
 

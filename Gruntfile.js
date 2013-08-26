@@ -19,11 +19,11 @@ module.exports = function(grunt) {
             options: {
                 report: 'min',
                 // the banner is inserted at the top of the output
-                banner: '/*! <%= pkg.name %> <%= grunt.template.today("dd-mm-yyyy") %> */\n'
+                banner: '/*! <%= pkg.name %> v<%= pkg.version %> | https://github.com/bkuhl/ng-form-ui */\n'
             },
             dist: {
                 files: {
-                    'js/<%= pkg.name %>.min.js': ['<%= concat.js.dest %>']
+                    'dist/<%= pkg.name %>.min.js': ['<%= concat.js.dest %>']
                 }
             }
         },

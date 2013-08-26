@@ -2,12 +2,38 @@
 
 angular.module('ng-form-ui', []);
 angular.module('ng-form-ui').
+    /**
+     * <input focus-me/>
+     */
+    directive('focusMe', ['$timeout', function ($timeout) {
+        return {
+            link: function (scope, element) {
+                $timeout(function () {
+                    element[0].focus();
+                });
+            }
+        };
+    }]);
+angular.module('ng-form-ui').
+    /**
+     * <slide-toggle ng-model="[expression]"></slide-toggle>
+     * Required attribute: ng-model="[expression]"
+     * Optional attribute: onlabel="xxxx" (defaults to "On")
+     * Optional attribute: offlabel="xxxx" (defaults to "Off")
+     */
     directive('slideToggle', ['$timeout', function ($timeout) {
         return {
             replace: true,
             restrict: 'E',
-            scope: false,
+            scope: {
+                model: "=ngModel"
+            },
             template: function (el, attr) {
+                attr = angular.extend({
+                    onlabel: "On",
+                    offlabel: "Off"
+                }, attr);
+
                 var html =
                     '<div class="slideToggle">'+
                         '<input type="checkbox" ng-model="' + attr.ngModel + '"/>' +
@@ -38,12 +64,14 @@ angular.module('ng-form-ui').
 
                 //toggle the state when clicked
                 el.bind('click', function () {
-                    scope[attrs.ngModel] = !scope[attrs.ngModel];
-                    if (el.hasClass('on')) {
-                        off();
-                    } else {
-                        on();
-                    }
+                    scope.$apply(function () {
+                        scope.model = !scope.model;
+                        if (el.hasClass('on')) {
+                            off();
+                        } else {
+                            on();
+                        }
+                    });
                 });
 
                 //use timeout trick to be sure code isn't executed till dom is ready

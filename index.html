@@ -24,16 +24,48 @@
     <br/>
     <p>Use these form elements to spice up your forms and keep things beautiful!</p>
     <br/>
-    <h3>slideToggle</h3>
-    <div class="row">
-        <div class="col-md-9 highlight">
-            <pre>&lt;slide-toggle onLabel="On" offLabel="Off" ng-model="slideToggleValue"&gt;&lt;slide-toggle&gt;</pre>
+        <div class="row">
+            <div class="col-md-12">
+                <h3 class='directive first'>focusMe</h3>
+                <p>Focus an element when the page loads</p>
+            </div>
         </div>
-        <div class="col-md-3">
-            Value: {{ slideToggleValue }}<br/>
-            <slide-toggle onLabel="On" offLabel="Off" ng-model="slideToggleValue"></slide-toggle>
+        <div class="row">
+            <div class="col-md-9 highlight">
+                <pre>&lt;input type="text" focus-me/&gt;</pre>
+            </div>
+            <div class="col-md-3">
+                <input type="text" focus-me/>
+            </div>
         </div>
-    </div>
+
+
+
+        <div class="row">
+            <div class="col-md-12">
+                <h3 class='directive'>slideToggle</h3>
+                <p>Toggle a boolean value using a fancy slider</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-9 highlight">
+                <pre>&lt;slide-toggle ng-model="slideToggleOnOff"&gt;&lt;slide-toggle&gt;</pre>
+            </div>
+            <div class="col-md-3">
+                ng-model: {{ slideToggleOnOff }}<br/>
+                <slide-toggle ng-model="slideToggleOnOff"></slide-toggle>
+            </div>
+        </div>
+        <div class="divider"></div>
+        <div class="row">
+            <div class="col-md-9">
+                <pre>&lt;slide-toggle onlabel="Active" offlabel="Inactive" ng-model="slideToggleActiveInactve"&gt;&lt;slide-toggle&gt;</pre>
+            </div>
+            <div class="col-md-3">
+                ng-model: {{ slideToggleActiveInactve }}<br/>
+                <slide-toggle onlabel="Active" offlabel="Inactive" ng-model="slideToggleActiveInactve"></slide-toggle>
+            </div>
+        </div>
 </div>
 </body>
 </html>

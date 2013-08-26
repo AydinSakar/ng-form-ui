@@ -1,4 +1,7 @@
 angular.module('ng-form-ui').
+    /**
+     * <input focus-me/>
+     */
     directive('focusMe', ['$timeout', function ($timeout) {
         return {
             link: function (scope, element) {
@@ -6,5 +9,5 @@ angular.module('ng-form-ui').
                     element[0].focus();
                 });
             }
-        }
+        };
     }]);

@@ -19,7 +19,7 @@ angular.module('ng-form-ui').
                 }, attr);
 
                 var html =
-                    '<div class="slideToggle">'+
+                    '<div class="ngSlideToggle">'+
                         '<input type="checkbox" ng-model="' + attr.ngModel + '"/>' +
                         '<div class="stSlide">'+
                             '<span class="stOn">' + attr.onlabel + '</span>'+

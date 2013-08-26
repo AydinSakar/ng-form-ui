@@ -1,14 +1,14 @@
-.slideToggle {
+.ngSlideToggle {
     cursor: pointer;
     overflow: hidden;
 }
-.slideToggle * {
+.ngSlideToggle * {
     box-sizing: content-box;
 }
-.slideToggle > input[type=checkbox] {
+.ngSlideToggle > input[type=checkbox] {
     display: none;
 }
-.slideToggle > .stSlide {
+.ngSlideToggle > .stSlide {
     transition: all 0.3s ease-in-out;
 }
 .stSlide > .stOff,

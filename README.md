@@ -3,8 +3,9 @@
 
 ## Features
 
-* <select-box> directive for styled select boxes
-* <slide-toggle> directive for on/off style switches
+* `<select-box>` directive for styled select boxes
+* `<slide-toggle>` directive for on/off style switches
+* `focus-me` directive for focusing form elements on page load
 
 ## Bug tracker
 

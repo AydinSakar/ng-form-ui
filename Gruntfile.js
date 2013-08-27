@@ -5,6 +5,7 @@ module.exports = function(grunt) {
             options: {
                 // define a string to put between each file in the concatenated output
                 //separator: ';'
+                banner: '/*! <%= pkg.name %> v<%= pkg.version %> | https://github.com/bkuhl/ng-form-ui */\n'
             },
             js: {
                 src: ['src/ng-form-ui.js', 'src/directives/**/*.js'],

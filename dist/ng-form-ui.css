@@ -1,15 +1,17 @@
-.slideToggle {
+/*! ng-form-ui v0.1.1 | https://github.com/bkuhl/ng-form-ui */
+.ngSlideToggle {
     cursor: pointer;
     overflow: hidden;
+    opacity: 0;
 }
-.slideToggle * {
+.ngSlideToggle * {
     box-sizing: content-box;
 }
-.slideToggle > input[type=checkbox] {
+.ngSlideToggle > input[type=checkbox] {
     display: none;
 }
-.slideToggle > .stSlide {
-    transition: all 0.3s ease-in-out;
+.ngSlideToggle > .stSlide {
+    transition: all 0.2s ease-in-out;
 }
 .stSlide > .stOff,
 .stSlide > .stOn,

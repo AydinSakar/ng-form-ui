@@ -1,3 +1,4 @@
+/*! ng-form-ui v0.1.1 | https://github.com/bkuhl/ng-form-ui */
 /*global angular */
 
 angular.module('ng-form-ui', []);
@@ -16,6 +17,40 @@ angular.module('ng-form-ui').
     }]);
 angular.module('ng-form-ui').
     /**
+     * <select-box ng-model="model.property" options="models" optExp="t.name for t in options"></select-box>
+     * Required attribute: ng-model="[expression]"
+     * Required attribute: optExp="[comprehension_expression]"
+     * Optional attribute: name="xxxx"
+     * Optional attribute: defaultLabel="xxxx" (used if ng-model is undefined or null)
+     */
+    directive('selectBox', function () {
+        return {
+            replace: true,
+            restrict: 'E',
+            scope: false,
+            template: function (el, attrs) {
+                if (!angular.isDefined(attrs.defaultLabel)) {
+                    attrs.defaultLabel = "";
+                }
+                var html = '<div class="ngSelectBox">'+
+                    '<span>{{ "' + attrs.defaultLabel + '" }}</span>'+
+                    '<select' + ((attrs.name) ? ' name="' + attrs.name + '"' : '') + ' ng-model="' + attrs.ngModel + '" ng-options="' + attrs.optexp + '"' + ((attrs.required) ? ' required' : '') + '></select>'+
+                    '</div>';
+                return html;
+            },
+            link: function (scope, el, attrs) {
+                scope.$watch(attrs.ngModel, function () {
+                    var select = el[0].children[1];
+                    //when value changes, update the selectBox text
+                    if (angular.isElement(el[0].firstChild)) {
+                        el[0].firstChild.innerText = select.options[select.selectedIndex].outerText;
+                    }
+                });
+            }
+        };
+    });
+angular.module('ng-form-ui').
+    /**
      * <slide-toggle ng-model="[expression]"></slide-toggle>
      * Required attribute: ng-model="[expression]"
      * Optional attribute: onlabel="xxxx" (defaults to "On")
@@ -25,9 +60,8 @@ angular.module('ng-form-ui').
         return {
             replace: true,
             restrict: 'E',
-            scope: {
-                model: "=ngModel"
-            },
+            scope: false,
+            require: '^ngModel',
             template: function (el, attr) {
                 attr = angular.extend({
                     onlabel: "On",
@@ -35,8 +69,8 @@ angular.module('ng-form-ui').
                 }, attr);
 
                 var html =
-                    '<div class="slideToggle">'+
-                        '<input type="checkbox" ng-model="' + attr.ngModel + '"/>' +
+                    '<div class="ngSlideToggle"' + ((angular.isDefined(attr.class)) ? ' class="'+attr.class+'"' : '') + '>'+
+                        '<input type="checkbox" ng-model="' + attr.ngModel + '"' + ((angular.isDefined(attr.id)) ? ' id="'+attr.id+'"' : '') + '' + ((angular.isDefined(attr.name)) ? ' name="'+attr.name+'"' : '') + '/>' +
                         '<div class="stSlide">'+
                             '<span class="stOn">' + attr.onlabel + '</span>'+
                             '<span class="stHandle">| | |</span>'+
@@ -45,7 +79,7 @@ angular.module('ng-form-ui').
                     '</div>';
                 return html;
             },
-            link: function (scope, el, attrs) {
+            link: function (scope, el, attrs, ctrl) {
                 var
                     container = el[0],
                     slide,
@@ -62,15 +96,10 @@ angular.module('ng-form-ui').
                         slide.style.marginLeft = "-" + (labelWidth + 1) + "px";
                     };
 
-                //toggle the state when clicked
+                //toggle the value when clicked
                 el.bind('click', function () {
                     scope.$apply(function () {
-                        scope.model = !scope.model;
-                        if (el.hasClass('on')) {
-                            off();
-                        } else {
-                            on();
-                        }
+                        ctrl.$setViewValue(!ctrl.$viewValue);
                     });
                 });
 
@@ -107,15 +136,16 @@ angular.module('ng-form-ui').
                     //set initial value - disable transitions initially so there's no animation
                     var transitionCache = window.getComputedStyle(slide).transition;
                     slide.style.transition = '';
-                    if (scope.$eval(attrs.ngModel)) {
+                    if (ctrl.$viewValue) {
                         on();
                     } else {
                         off();
                     }
+                    container.style.opacity = 1;
                     slide.style.transition = transitionCache;
 
                     //change button when value changes
-                    scope.$watch(attrs.ngModel, function (oldValue, newValue) {
+                    scope.$watch(attrs.ngModel, function (newValue) {
                         if (newValue) {
                             on();
                         } else {

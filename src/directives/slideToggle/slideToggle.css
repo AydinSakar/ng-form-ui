@@ -1,6 +1,7 @@
 .ngSlideToggle {
     cursor: pointer;
     overflow: hidden;
+    opacity: 0;
 }
 .ngSlideToggle * {
     box-sizing: content-box;
@@ -9,7 +10,7 @@
     display: none;
 }
 .ngSlideToggle > .stSlide {
-    transition: all 0.3s ease-in-out;
+    transition: all 0.2s ease-in-out;
 }
 .stSlide > .stOff,
 .stSlide > .stOn,

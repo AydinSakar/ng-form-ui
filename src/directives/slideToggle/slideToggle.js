@@ -9,9 +9,8 @@ angular.module('ng-form-ui').
         return {
             replace: true,
             restrict: 'E',
-            scope: {
-                model: "=ngModel"
-            },
+            scope: false,
+            require: '^ngModel',
             template: function (el, attr) {
                 attr = angular.extend({
                     onlabel: "On",
@@ -19,8 +18,8 @@ angular.module('ng-form-ui').
                 }, attr);
 
                 var html =
-                    '<div class="ngSlideToggle">'+
-                        '<input type="checkbox" ng-model="' + attr.ngModel + '"/>' +
+                    '<div class="ngSlideToggle"' + ((angular.isDefined(attr.class)) ? ' class="'+attr.class+'"' : '') + '>'+
+                        '<input type="checkbox" ng-model="' + attr.ngModel + '"' + ((angular.isDefined(attr.id)) ? ' id="'+attr.id+'"' : '') + '' + ((angular.isDefined(attr.name)) ? ' name="'+attr.name+'"' : '') + '/>' +
                         '<div class="stSlide">'+
                             '<span class="stOn">' + attr.onlabel + '</span>'+
                             '<span class="stHandle">| | |</span>'+
@@ -29,7 +28,7 @@ angular.module('ng-form-ui').
                     '</div>';
                 return html;
             },
-            link: function (scope, el, attrs) {
+            link: function (scope, el, attrs, ctrl) {
                 var
                     container = el[0],
                     slide,
@@ -46,15 +45,10 @@ angular.module('ng-form-ui').
                         slide.style.marginLeft = "-" + (labelWidth + 1) + "px";
                     };
 
-                //toggle the state when clicked
+                //toggle the value when clicked
                 el.bind('click', function () {
                     scope.$apply(function () {
-                        scope.model = !scope.model;
-                        if (el.hasClass('on')) {
-                            off();
-                        } else {
-                            on();
-                        }
+                        ctrl.$setViewValue(!ctrl.$viewValue);
                     });
                 });
 
@@ -91,15 +85,16 @@ angular.module('ng-form-ui').
                     //set initial value - disable transitions initially so there's no animation
                     var transitionCache = window.getComputedStyle(slide).transition;
                     slide.style.transition = '';
-                    if (scope.$eval(attrs.ngModel)) {
+                    if (ctrl.$viewValue) {
                         on();
                     } else {
                         off();
                     }
+                    container.style.opacity = 1;
                     slide.style.transition = transitionCache;
 
                     //change button when value changes
-                    scope.$watch(attrs.ngModel, function (oldValue, newValue) {
+                    scope.$watch(attrs.ngModel, function (newValue) {
                         if (newValue) {
                             on();
                         } else {

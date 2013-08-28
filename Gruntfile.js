@@ -28,6 +28,14 @@ module.exports = function(grunt) {
                 }
             }
         },
+        copy: {
+            images: {
+                expand: true,
+                src: 'src/**/images/*',
+                dest: 'dist/images/',
+                flatten: true
+            }
+        },
         jshint: {
             // define the files to lint
             files: ['gruntfile.js', 'src/**/*.js']
@@ -43,6 +51,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-qunit');
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-contrib-concat');
+    grunt.loadNpmTasks('grunt-contrib-copy');
 
-    grunt.registerTask('default', ['jshint', 'concat', 'uglify']);
+    grunt.registerTask('default', ['jshint', 'concat', 'uglify', 'copy']);
 };

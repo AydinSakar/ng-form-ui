@@ -1,4 +1,4 @@
-/*! ng-form-ui v0.1.1 | https://github.com/bkuhl/ng-form-ui */
+/*! ng-form-ui v0.1.2 | https://github.com/bkuhl/ng-form-ui */
 /*global angular */
 
 angular.module('ng-form-ui', []);
@@ -29,20 +29,23 @@ angular.module('ng-form-ui').
             restrict: 'E',
             scope: false,
             template: function (el, attrs) {
-                if (!angular.isDefined(attrs.defaultLabel)) {
-                    attrs.defaultLabel = "";
+                if (!angular.isDefined(attrs.defaultlabel)) {
+                    attrs.defaultlabel = "";
                 }
-                var html = '<div class="ngSelectBox">'+
-                    '<span>{{ "' + attrs.defaultLabel + '" }}</span>'+
-                    '<select' + ((attrs.name) ? ' name="' + attrs.name + '"' : '') + ' ng-model="' + attrs.ngModel + '" ng-options="' + attrs.optexp + '"' + ((attrs.required) ? ' required' : '') + '></select>'+
+                if (!angular.isDefined(attrs.optexp)) {
+                    console.error("A comprehension expression must be defined with the attribute optExp for selectBox", attrs);
+                }
+                var html = '<div class="ngSelectBox' + ((angular.isDefined(attrs.class)) ? ' ' + attrs.class : '') + '">'+
+                    '<span>{{ "' + attrs.defaultlabel + '" }}</span>'+
+                        '<select ng-model="' + attrs.ngModel + '" ng-options="' + attrs.optexp + '"' + ((attrs.required) ? ' required' : '') + '' + ((angular.isDefined(attrs.id)) ? ' id="'+attrs.id+'"' : '') + '' + ((attrs.name) ? ' name="' + attrs.name + '"' : '') + '></select>'+
                     '</div>';
                 return html;
             },
             link: function (scope, el, attrs) {
                 scope.$watch(attrs.ngModel, function () {
                     var select = el[0].children[1];
-                    //when value changes, update the selectBox text
-                    if (angular.isElement(el[0].firstChild)) {
+                    //when value changes, update the selectBox text)
+                    if (angular.isElement(el[0].firstChild) && angular.isDefined(select.options[select.selectedIndex]) && select.selectedIndex > 0) {
                         el[0].firstChild.innerText = select.options[select.selectedIndex].outerText;
                     }
                 });
@@ -62,19 +65,19 @@ angular.module('ng-form-ui').
             restrict: 'E',
             scope: false,
             require: '^ngModel',
-            template: function (el, attr) {
-                attr = angular.extend({
+            template: function (el, attrs) {
+                attrs = angular.extend({
                     onlabel: "On",
                     offlabel: "Off"
-                }, attr);
+                }, attrs);
 
                 var html =
-                    '<div class="ngSlideToggle"' + ((angular.isDefined(attr.class)) ? ' class="'+attr.class+'"' : '') + '>'+
-                        '<input type="checkbox" ng-model="' + attr.ngModel + '"' + ((angular.isDefined(attr.id)) ? ' id="'+attr.id+'"' : '') + '' + ((angular.isDefined(attr.name)) ? ' name="'+attr.name+'"' : '') + '/>' +
+                    '<div class="ngSlideToggle"' + ((angular.isDefined(attrs.class)) ? ' class="'+attrs.class+'"' : '') + '>'+
+                        '<input type="checkbox" ng-model="' + attrs.ngModel + '"' + ((angular.isDefined(attrs.id)) ? ' id="'+attrs.id+'"' : '') + '' + ((angular.isDefined(attrs.name)) ? ' name="'+attrs.name+'"' : '') + '/>' +
                         '<div class="stSlide">'+
-                            '<span class="stOn">' + attr.onlabel + '</span>'+
+                            '<span class="stOn">' + attrs.onlabel + '</span>'+
                             '<span class="stHandle">| | |</span>'+
-                            '<span class="stOff">' + attr.offlabel + '</span>'+
+                            '<span class="stOff">' + attrs.offlabel + '</span>'+
                         '</div>'+
                     '</div>';
                 return html;

@@ -12,23 +12,26 @@ angular.module('ng-form-ui').
             restrict: 'E',
             scope: false,
             template: function (el, attrs) {
-                if (!angular.isDefined(attrs.defaultLabel)) {
-                    attrs.defaultLabel = "";
+                if (!angular.isDefined(attrs.defaultlabel)) {
+                    attrs.defaultlabel = "";
                 }
-                var html = '<div class="ngSelectBox">'+
-                    '<span>{{ "' + attrs.defaultLabel + '" }}</span>'+
-                    '<select' + ((attrs.name) ? ' name="' + attrs.name + '"' : '') + ' ng-model="' + attrs.ngModel + '" ng-options="' + attrs.optexp + '"' + ((attrs.required) ? ' required' : '') + '></select>'+
+                if (!angular.isDefined(attrs.optexp)) {
+                    console.error("A comprehension expression must be defined with the attribute optExp for selectBox", attrs);
+                }
+                var html = '<div class="ngSelectBox' + ((angular.isDefined(attrs.class)) ? ' ' + attrs.class : '') + '">'+
+                    '<span>{{ "' + attrs.defaultlabel + '" }}</span>'+
+                        '<select ng-model="' + attrs.ngModel + '" ng-options="' + attrs.optexp + '"' + ((attrs.required) ? ' required' : '') + '' + ((angular.isDefined(attrs.id)) ? ' id="'+attrs.id+'"' : '') + '' + ((attrs.name) ? ' name="' + attrs.name + '"' : '') + '></select>'+
                     '</div>';
                 return html;
             },
             link: function (scope, el, attrs) {
                 scope.$watch(attrs.ngModel, function () {
-                    var model = scope.$eval(attrs.ngModel);
-                    //when value changes, update the selectBox text
-                    if (angular.isElement(el[0].firstChild) && angular.isDefined(model) && model != null && angular.isDefined(model.name)) {
-                        el[0].firstChild.innerText = model.name;
+                    var select = el[0].children[1];
+                    //when value changes, update the selectBox text)
+                    if (angular.isElement(el[0].firstChild) && angular.isDefined(select.options[select.selectedIndex]) && select.selectedIndex > 0) {
+                        el[0].firstChild.innerText = select.options[select.selectedIndex].outerText;
                     }
                 });
             }
-        }
+        };
     });

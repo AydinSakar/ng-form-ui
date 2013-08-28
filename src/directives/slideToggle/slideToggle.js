@@ -11,19 +11,19 @@ angular.module('ng-form-ui').
             restrict: 'E',
             scope: false,
             require: '^ngModel',
-            template: function (el, attr) {
-                attr = angular.extend({
+            template: function (el, attrs) {
+                attrs = angular.extend({
                     onlabel: "On",
                     offlabel: "Off"
-                }, attr);
+                }, attrs);
 
                 var html =
-                    '<div class="ngSlideToggle"' + ((angular.isDefined(attr.class)) ? ' class="'+attr.class+'"' : '') + '>'+
-                        '<input type="checkbox" ng-model="' + attr.ngModel + '"' + ((angular.isDefined(attr.id)) ? ' id="'+attr.id+'"' : '') + '' + ((angular.isDefined(attr.name)) ? ' name="'+attr.name+'"' : '') + '/>' +
+                    '<div class="ngSlideToggle"' + ((angular.isDefined(attrs.class)) ? ' class="'+attrs.class+'"' : '') + '>'+
+                        '<input type="checkbox" ng-model="' + attrs.ngModel + '"' + ((angular.isDefined(attrs.id)) ? ' id="'+attrs.id+'"' : '') + '' + ((angular.isDefined(attrs.name)) ? ' name="'+attrs.name+'"' : '') + '/>' +
                         '<div class="stSlide">'+
-                            '<span class="stOn">' + attr.onlabel + '</span>'+
+                            '<span class="stOn">' + attrs.onlabel + '</span>'+
                             '<span class="stHandle">| | |</span>'+
-                            '<span class="stOff">' + attr.offlabel + '</span>'+
+                            '<span class="stOff">' + attrs.offlabel + '</span>'+
                         '</div>'+
                     '</div>';
                 return html;
